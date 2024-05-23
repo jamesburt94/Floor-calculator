@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Coating Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, input, button {
+            margin: 10px 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Garage Floor Coating Calculator</h1>
+    <label for="squareFeet">Enter Floor Area (in square feet):</label>
+    <input type="number" id="squareFeet" required>
+    <button onclick="calculateGallons()">Calculate</button>
+    <h2>Results:</h2>
+    <p id="baseCoat"></p>
+    <p id="topCoat"></p>
+    <p id="basePartA"></p>
+    <p id="basePartB"></p>
+    <p id="topPartA"></p>
+    <p id="topPartB"></p>
+
+    <script>
+        function calculateGallons() {
+            var squareFeet = document.getElementById('squareFeet').value;
+
+            if (!squareFeet || squareFeet <= 0) {
+                alert('Please enter a valid floor area.');
+                return;
+            }
+
+            // Coverage per gallon
+            var baseCoatCoverage = 250;
+            var topCoatCoverage = 150;
+
+            // Calculate gallons needed for base coat
+            var baseCoatGallons = Math.ceil((squareFeet / baseCoatCoverage) * 4) / 4;
+            // Calculate gallons needed for top coat
+            var topCoatGallons = Math.ceil((squareFeet / topCoatCoverage) * 4) / 4;
+
+            // Calculate Part A and Part B for base coat
+            var basePartAGallons = Math.ceil((baseCoatGallons / 2) * 4) / 4;
+            var basePartBGallons = basePartAGallons;
+
+            // Calculate Part A and Part B for top coat
+            var topPartAGallons = Math.ceil((topCoatGallons / 2) * 4) / 4;
+            var topPartBGallons = topPartAGallons;
+
+            // Display results
+            document.getElementById('baseCoat').innerText = 'Base Coat: ' + baseCoatGallons + ' gallons';
+            document.getElementById('topCoat').innerText = 'Top Coat: ' + topCoatGallons + ' gallons';
+            document.getElementById('basePartA').innerText = 'Base Coat Part A: ' + basePartAGallons + ' gallons';
+            document.getElementById('basePartB').innerText = 'Base Coat Part B: ' + basePartBGallons + ' gallons';
+            document.getElementById('topPartA').innerText = 'Top Coat Part A: ' + topPartAGallons + ' gallons';
+            document.getElementById('topPartB').innerText = 'Top Coat Part B: ' + topPartBGallons + ' gallons';
+        }
+    </script>
+</body>
+</html>
